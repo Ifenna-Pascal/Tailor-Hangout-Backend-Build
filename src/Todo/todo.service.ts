@@ -7,8 +7,9 @@ export class TodoService {
     getAlltodos(){
         return this.todos;
     }
-    createTodo(todo: Todo):void{
+    createTodo(todo: Todo):Todo{
         this.todos.push(todo)
+        return todo;
     }
     findOneTodo(id:string):Todo{
       const todo =   this.todos.find(todo => todo.id === id)
