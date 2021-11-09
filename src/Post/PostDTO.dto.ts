@@ -1,6 +1,6 @@
 export class PostDTO {
-    title: string;
-    content: string;
-    post_media?: string;
-    createdAt: Date
+  title: string;
+  content: string;
+  post_media?: string;
+  createdAt: Date;
 }
