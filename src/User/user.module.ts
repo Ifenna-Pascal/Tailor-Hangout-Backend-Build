@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { userSchema, User } from './user.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 @Module({
@@ -28,7 +27,7 @@ import * as bcrypt from 'bcrypt';
       },
     ]),
   ],
-  controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule {}
