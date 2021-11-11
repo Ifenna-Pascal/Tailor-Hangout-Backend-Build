@@ -19,6 +19,9 @@ export class Post {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
   owner: User;
 
+  @Prop()
+  likes: number;
+
   @Prop({ default: Date.now() })
   createdAt: Date;
 }
