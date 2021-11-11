@@ -13,14 +13,18 @@ import { PostService } from './post.service';
 import { PostDTO } from './PostDTO.dto';
 import { JwtAuthGuard } from 'src/Auth/jwtGuard';
 import { IPost } from './post_interface';
+import { UserService } from 'src/user/user.service';
 
 @Controller('post')
 export class PostController {
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private readonly userService: UserService,
+  ) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAllPosts(@Request() req): Promise<IPost[]> {
+  async findAllPosts(@Request() req): Promise<any[]> {
     return await this.postService.allPosts();
   }
 
@@ -29,7 +33,13 @@ export class PostController {
   async createPost(@Body() post: PostDTO, @Request() req) {
     try {
       post.owner = req.user._id;
-      return await this.postService.createPost(post);
+      const post_created = await this.postService.createPost(post);
+      if (post_created) {
+        return await this.userService.find_and_update(
+          req.user._id,
+          post_created._id,
+        );
+      }
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.FORBIDDEN);
     }

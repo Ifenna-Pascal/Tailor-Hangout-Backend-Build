@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
         useFactory: () => {
           const schema = userSchema;
           schema.pre<User>('save', function (next) {
-            var user = this;
+            const user = this;
             bcrypt.genSalt(10, (err, salt) => {
               if (err) return next(err);
               console.log(salt);

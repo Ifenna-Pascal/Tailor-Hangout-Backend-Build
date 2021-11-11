@@ -19,6 +19,14 @@ export class UserService {
     return user;
   }
 
+  async find_and_update(id: string, post_id: string): Promise<User> {
+    const updated_user = await this.userModel.findOneAndUpdate(
+      { _id: id },
+      { $addToSet: { posts: post_id } },
+    );
+    return updated_user;
+  }
+
   async Register_User(user: user_registrationDTO): Promise<User> {
     const { email } = user;
     const found_user = await this.find_user_by_email(email);
