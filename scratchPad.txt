@@ -1,0 +1,7 @@
+things to to
+
+comment functionality
+like functionality
+follow and unfollow functionality
+upload profile pictures using clooudinary
+upload work pictures using clooudinary

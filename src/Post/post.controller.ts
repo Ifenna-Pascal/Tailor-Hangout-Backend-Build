@@ -14,12 +14,14 @@ import { PostDTO } from './PostDTO.dto';
 import { JwtAuthGuard } from 'src/Auth/jwtGuard';
 import { IPost } from './post_interface';
 import { UserService } from 'src/user/user.service';
+import { CommentsService } from 'src/comments/comments.service';
 
 @Controller('post')
 export class PostController {
   constructor(
     private readonly postService: PostService,
     private readonly userService: UserService,
+    private readonly commentService: CommentsService,
   ) {}
 
   @UseGuards(JwtAuthGuard)
